@@ -1,15 +1,15 @@
  <?php
 session_start();
 ?>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-
-</head>
 <html>
 
+<head>
 <?php include 'res/libs/headLibs.php'; ?>
 <?php include 'res/libs/navbar.html'; ?>
+</head>
+
+
 <body>
 
 
@@ -27,8 +27,9 @@ require('config.php');
 
 	if (!mysql_select_db($database))
 		die("Can't select database");
-mysql_query("SET NAMES 'utf8'");
-mysql_query("SET CHARACTER SET 'utf8'");
+
+	mysql_query("SET NAMES 'utf8'");				
+	mysql_query("SET CHARACTER SET 'utf8'");
 	$result = mysql_query("select * from news");
 	
 	if (!$result) {

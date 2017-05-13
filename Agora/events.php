@@ -4,8 +4,10 @@ session_start();
 
 <html>
 
+<head>
 <?php include 'res/libs/headLibs.php'; ?>
 <?php include 'res/libs/navbar.html'; ?>
+</head>
 <body>
 
 
