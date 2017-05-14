@@ -23,6 +23,7 @@ $lat=$_POST['lat'];
 $lng=$_POST['lng'];
 $image_path=$_POST['problemImage'];
 
+<<<<<<< HEAD
 //$query_in="INSERT INTO $tbl_name ('title','description,address,lat,lgn) VALUES ('$title','$desc','$addr','$lat','$lng')";
 $query_in=  "INSERT INTO `problems`(`title`, `description`, `lat`, `lng`, `address`) VALUES ('$title','$desc','$lat','$lng','$addr')";
 
@@ -31,6 +32,16 @@ if ($mysqli->query($query_in) === TRUE) {
 }
 else
 	echo "Error: " . $query_in . "<br>" . $mysqli->error;
+=======
+$query_in="INSERT INTO $tbl_name (title,description,address,lat,lgn) VALUES ('$title','$desc','$addr','$lat','$lng')";
+
+
+if ($mysqli->query($query_in) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+>>>>>>> origin/master
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 $mysqli->close();
