@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<!-- Login Modal called from above -->
+  <div id="userProfileModalID" class="w3-modal">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:300px">
+  
+      <div class="w3-center"><br>
+        <span class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" onclick="document.getElementById('userProfileModalID').style.display='none'" title="Close Modal">×</span>
+        <img src="res/images/loginAvatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+        <!--The below fields change from navbarMain.jsp so that they are the user's details-->
+        <div class="w3-container w3-center">
+        <label>Καλωσόρισες <b><?= $uname  ?></b></label>
+        <!--
+        </div>
+        <br>
+        <div class=" w3-left w3-margin-left">
+        <br>
+        <label>Όνομα : <b><%=user.name%></b></label>
+        <br>
+        <br>
+        <label>Επώνυμο : <b><%=user.surname%></b></label>
+        <br>
+        <br>
+        <label>Email : <b><%=user.email%></b></label>
+        <br>
+        <br>
+        <label>Κατηγορία : <b><%=user.user_type%></b></label>
+        -->
+        <br>
+        <br>
+        </div>
+
+        <!------------------------------------------------------------------------------------>
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+          <form method="POST" action="res/logout.php">
+          <button class="w3-btn-block w3-green w3-section w3-padding w3-red" type="submit">Αποσύνδεση</button>
+          </form>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+<!------------------------------------------>
