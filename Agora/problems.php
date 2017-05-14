@@ -7,40 +7,58 @@
 
 
 <link rel="stylesheet" type="text/css" href="css/sidebar01.css">
-
-
-
-
+ <style type="text/css">
+               body {
+                       font-family: sans-serif;
+                       font-size: 14px;
+               }
+       </style>
+      
+       <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLha_GB44Ty36f2RwDHHz5YEameQYTB5Q&sensor=false&amp;libraries=places" type="text/javascript"></script>
+       
+        <script type="text/javascript">
+               function initialize() {
+                       var input = document.getElementById('searchTextField');
+                       
+                       var autocomplete = new google.maps.places.Autocomplete(input);
+                      
+                    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                       var place = autocomplete.getPlace();
+                       var loc =  place.geometry.location;
+                      // var res = loc.split(",");
+                         //console.log("input: " + loc.lng());
+                       document.getElementById("lat_id").value = loc.lng();
+                       document.getElementById("lng_id").value = loc.lat();                          
+                      
+            });                         
+               }
+               google.maps.event.addDomListener(window, 'load', initialize);              
+          
+      </script>
 
 </head>
 
-
-	<script
-		src="http://maps.googleapis.com/maps/api/js">
-	</script>
-
-	<script>
-	function initialize() {
-	  var mapProp = {
-		center:new google.maps.LatLng(37.97532689557135,23),
-		zoom:7
-	,
-		mapTypeId:google.maps.MapTypeId.ROADMAP
-	  };
-	  var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+<script>
+	function w3_open() {
+	    document.getElementById("mySidebar").style.display = "block";
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
+	function w3_close() {
+	    document.getElementById("mySidebar").style.display = "none";
+	}
+</script>
+     
+	
+
 
 <script>
 	function openNav() {
 	    document.getElementById("mySidenav").style.width = "250px";
-	    document.getElementById("mainSideBarPage").style.marginLeft = "250px";
+	    document.getElementById("main").style.marginLeft = "250px";
 	}
 
 	function closeNav() {
 	    document.getElementById("mySidenav").style.width = "0";
-	    document.getElementById("mainSideBarPage").style.marginLeft= "0";
+	    document.getElementById("main").style.marginLeft= "0";
 	}
 </script>
 
@@ -65,11 +83,14 @@
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Εισάγετε Τίτλο Προβλήματος" name="title" required>
           <br>
           <label><b>Περιγραφή</b></label>
-          <textarea rows="6" class="w3-input  w3-border w3-margin-bottom"  placeholder="Εισάγετε Περιγραφή" name="description" required></textarea>
+          <input class="w3-input w3-border" type="text" placeholder="Εισάγετε Περιγραφή" name="description" required>
 
       	  <br>
           <label><b>Διεύθυνση</b></label>
-          <input class="w3-input w3-border" type="text" placeholder="Εισάγετε Διεύθυνση" name="description" required>
+          <input class="w3-input w3-border" id="searchTextField" type="text" placeholder="Εισάγετε Διεύθυνση" name="address" autocomplete="on" required>
+                             
+                       <input id="lat_id" name="lat" type="hidden">
+  <input id="lng_id" name="lng" type="hidden" >
           <br>
           <label><b>Φωτογραφία</b></label>
           <input class="w3-input w3-border" type="file"  accept="image/*" name="image" required>
@@ -89,7 +110,6 @@
 	<div id="mainSideBarPage">
 
 	<div class="right-arrow" onclick="openNav()"></div>
-	<div id="googleMap" style="width:100%;height:1000px;"> 
 
 	</div>
 
