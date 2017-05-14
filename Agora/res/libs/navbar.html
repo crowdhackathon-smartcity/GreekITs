@@ -1,8 +1,4 @@
 <?php
-include 'res/loginModal.html';
-
-
-
 session_start();
 
 $user_found = false;
@@ -13,11 +9,12 @@ if (isset($_SESSION["username"]))
   $user_found = true;
 }
 else
-  $uname = "none";
+  $uname = "Σύνδεση";
 
 
 
-
+include 'res/loginModal.html';
+include 'res/userProfileModal.html';
 
 
 ?>
@@ -81,7 +78,7 @@ else
     <a href="problems.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Προβλήματα</a>
 
 		<div class="w3-right">
-		Παναγιώτης Κυρκος
+		<?= $uname  ?>
 	   <a class="w3-image" onclick="chooseModal()"><img src="res/images/profile-icon.png" height="30" width="30"></a>
 	   </div>
   </div>

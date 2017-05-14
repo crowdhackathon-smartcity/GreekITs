@@ -1,10 +1,3 @@
-<%-- 
-    Document   : loginModal
-    Created on : Jan 23, 2017, 6:17:18 PM
-    Author     : Panos
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <style>
@@ -28,7 +21,7 @@
         <img src="res/images/loginAvatar.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 
-      <form class="w3-container" action="LoginServlet">
+      <form class="w3-container" method="POST" action="res/login_check.php">
         <div class="w3-section">
           <label><b>Όνομα Χρήστη</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Εισάγετε Όνομα Χρήστη" name="username" required>
