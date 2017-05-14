@@ -30,12 +30,15 @@
 	<div class="right-arrow" onclick="openNav()"></div>
 
 	</div>
+       <?php
+  require('db_functions.php');
 
+ ?>
 
   <div id="mapid" style="width: 1100px; height: 600px;"></div>
 <script>
-
-	var mymap = L.map('mapid').setView([38.017665, 23.685927], 15);
+     <?php ?>
+	var mymap = L.map('mapid').setView([38.017665, 23.685927], 13);
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
@@ -69,17 +72,19 @@
     popupAnchor: [-3, -76]    
 });
 
-	L.marker([38.017665, 23.685927] , {icon: problemsIcon} ).addTo(mymap)
-		.bindPopup("<div style=''> <b>Λακούβα στην οδό Τριάδος 33, Περιστέρι </b><br />Εικόνα <img src='res/images/problems/"+"lakouva01.jpg"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> </div>").openPopup();
-
-
+	<?php foreach($products as $product) { ?>
+	L.marker([<?php echo $product->lat; ?>, <?php echo $product->lng; ?>] , {icon: problemsIcon} ).addTo(mymap)
+		.bindPopup("<div style=''> <b> "+ " <?php echo $product->title; ?></b>"+"<br /> <p> "+ " <?php echo  $product->description; ?>" +" </p> <img src='res/images/problems/"+"<?php echo  $product->image_path; ?>"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> <p> "+ " <?php echo  $product->address; ?>" +"</p> </div>").openPopup();
+  <?php 
+       }
+  ?>
 
   L.marker([38.004642, 23.703084] , {icon: eventsIcon} ).addTo(mymap)
 		.bindPopup("<div style=''> <b>Πανηγύρι Αγίας Βαρβάρας </b><br />Εικόνα <img src='res/images/events/"+"panigiri01.jpg"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> </div>").openPopup();
 
 	var popup = L.popup();
 
-</script>
+</script>  
 
 
 
