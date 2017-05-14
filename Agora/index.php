@@ -39,8 +39,8 @@ div#mapid {
                var loc =  place.geometry.location;
               // var res = loc.split(",");
                  //console.log("input: " + loc.lng());
-               document.getElementById("lat_id").value = loc.lng();
-               document.getElementById("lng_id").value = loc.lat();                          
+               document.getElementById("lat_id").value = loc.lat();
+               document.getElementById("lng_id").value = loc.lng();                          
               
     });                         
        }
