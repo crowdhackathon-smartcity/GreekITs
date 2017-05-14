@@ -14,15 +14,7 @@
 
 </head>
 
-<script>
-	function w3_open() {
-	    document.getElementById("mySidebar").style.display = "block";
-	}
-	function w3_close() {
-	    document.getElementById("mySidebar").style.display = "none";
-	}
-</script>
-     
+
 	<script
 		src="http://maps.googleapis.com/maps/api/js">
 	</script>
@@ -43,12 +35,12 @@
 <script>
 	function openNav() {
 	    document.getElementById("mySidenav").style.width = "250px";
-	    document.getElementById("main").style.marginLeft = "250px";
+	    document.getElementById("mainSideBarPage").style.marginLeft = "250px";
 	}
 
 	function closeNav() {
 	    document.getElementById("mySidenav").style.width = "0";
-	    document.getElementById("main").style.marginLeft= "0";
+	    document.getElementById("mainSideBarPage").style.marginLeft= "0";
 	}
 </script>
 
