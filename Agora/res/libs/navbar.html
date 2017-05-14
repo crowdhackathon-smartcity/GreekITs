@@ -1,38 +1,88 @@
+<?php
+include 'res/loginModal.html';
+
+
+
+session_start();
+
+$user_found = false;
+
+if (isset($_SESSION["username"]))
+{
+  $uname = $_SESSION["username"];
+  $user_found = true;
+}
+else
+  $uname = "none";
+
+
+
+
+
+
+?>
+
 <link rel="stylesheet" type="text/css" href="/css/w3.css">
 
-<div class="w3-navbar w3-black w3-top">
-	<div class="w3-left">
-		<div class="w3-dropdown-hover">
-			<button class="w3-button">Χαιδάρι</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4">
-			  <a href="announcements.php" class="w3-bar-item w3-button">Ανακοινώσεις</a>
-			  <a href="news.php" class="w3-bar-item w3-button">Ειδήσεις</a>
-			  <a href="documents.php" class="w3-bar-item w3-button">Δημόσια Έγγραφα</a>
-			</div>
-		</div>
-		
-		<div class="w3-dropdown-hover">
-			<button class="w3-button">Τοποθεσίες</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4">
-			  <a href="locations.php" class="w3-bar-item w3-button">Σημεία ενδιαφέροντος - Αξιοθέατα</a>
-			  <a href="shops.php" class="w3-bar-item w3-button">Καταστήματα - Επιχειρήσεις</a>
-			  <a href="services.php" class="w3-bar-item w3-button">Δημόσιες Υπηρεσίες</a>
-			</div>
-		</div>
-		
-		<div class="w3-dropdown-hover">
-			<button class="w3-button">Δράσεις</button>
-			<div class="w3-dropdown-content w3-bar-block w3-card-4">
-			  <a href="events.php" class="w3-bar-item w3-button">Εκδηλώσεις</a>
-			  <a href="volunteers.php" class="w3-bar-item w3-button">Εθελοντικές Δράσεις</a>
-			</div>
-		</div>
-		 <a href="problems.php" class="w3-bar-item w3-button">Προβλήματα</a>
-	</div>
-	<div class="w3-right">
-		
-		<text class="w3-text">Παναγιώτης Κυρκος</text>
-		<a class="w3-image" href="#"><img src="res/images/profile-icon.png" height="30" width="30"></a>
-	</div>
-	
+
+<script type="text/javascript">
+
+    function chooseModal()
+    {
+        var logged_in = "<?php echo $user_found ?>"; 
+
+
+        if (logged_in == true) {
+            document.getElementById("userProfileModalID").style.display="block";
+            //document.getElementById("userProfileModalUsername").innerHTML="<b>"+username_cookie+"</b>";
+        }
+        else
+        {
+             document.getElementById("loginModal").style.display="block";
+        }
+        
+    }
+
+</script>
+
+
+<div class="w3-top">
+  <div class="w3-navbar w3-black w3-card-2">
+
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button">Αχαρναί<i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="announcements.php" class="w3-bar-item w3-button">Ανακοινώσεις</a>
+        <a href="news.php" class="w3-bar-item w3-button">Ειδήσεις</a>
+        <a href="documents.php" class="w3-bar-item w3-button">Δημόσια Έγγραφα</a>
+      </div>
+    </div>
+
+
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" >Τοποθεσίες<i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="locations.php" class="w3-bar-item w3-button">Σημεία ενδιαφέροντος - Αξιοθέατα</a>
+        <a href="shops.php" class="w3-bar-item w3-button">Επιχειρήσεις</a>
+        <a href="services.php" class="w3-bar-item w3-button">Δημόσιες Υπηρεσίες</a>
+      </div>
+    </div>
+
+
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button">Δράσεις<i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="events.php" class="w3-bar-item w3-button">Εκδηλώσεις</a>
+        <a href="volunteers.php" class="w3-bar-item w3-button">Εθελοντικές Δράσεις</a>
+      </div>
+    </div>
+
+
+    <a href="problems.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Προβλήματα</a>
+
+		<div class="w3-right">
+		Παναγιώτης Κυρκος
+	   <a class="w3-image" onclick="chooseModal()"><img src="res/images/profile-icon.png" height="30" width="30"></a>
+	   </div>
+  </div>
 </div>
