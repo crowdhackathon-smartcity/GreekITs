@@ -8,6 +8,7 @@
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
+	    z-index: 22;
     padding-top: 100px;
 }
 
@@ -44,6 +45,8 @@ position: relative;
 background: #303E45;
 padding: 20px;
 cursor:pointer;
+z-index:1;
+top: 243px;
 }
 
 .right-arrow:after {
@@ -58,4 +61,5 @@ cursor:pointer;
 	border-right: 20px solid transparent;
 	border-bottom: 20px solid transparent;
 	border-left: 20px solid #303E45;
+	z-index:1;    top: 0px;
 }

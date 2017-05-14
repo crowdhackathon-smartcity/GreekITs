@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ε<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,7 +9,10 @@
 	
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
+      
+       <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLha_GB44Ty36f2RwDHHz5YEameQYTB5Q&sensor=false&amp;libraries=places" type="text/javascript"></script>
+       
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
 
@@ -17,12 +20,102 @@
 
 
 <link rel="stylesheet" type="text/css" href="css/sidebar01.css">
- 
 
+<style>
+
+
+div#mapid {
+       z-index: 0;
+}
+</style> 
+<script type="text/javascript">
+       function initialize() {
+               var input = document.getElementById('searchTextField');
+               
+               var autocomplete = new google.maps.places.Autocomplete(input);
+              
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+               var place = autocomplete.getPlace();
+               var loc =  place.geometry.location;
+              // var res = loc.split(",");
+                 //console.log("input: " + loc.lng());
+               document.getElementById("lat_id").value = loc.lng();
+               document.getElementById("lng_id").value = loc.lat();                          
+              
+    });                         
+       }
+       google.maps.event.addDomListener(window, 'load', initialize);              
+  
+</script>
 </head>
+
+
+
+<script>
+
+
+	function w3_open() {
+	    document.getElementById("mySidebar").style.display = "block";
+	}
+	function w3_close() {
+	    document.getElementById("mySidebar").style.display = "none";
+	}
+
+	function openNav() {
+	    document.getElementById("mySidenav").style.width = "250px";
+	    document.getElementById("mainSideBarPage").style.marginLeft = "250px";
+	}
+
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	    document.getElementById("mainSideBarPage").style.marginLeft= "0";
+	}
+
+
+</script>
+
+
 
 <body>
           
+		  
+		  
+	<div id="mySidenav" class="sidenav w3-theme-dark">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+
+
+
+	  <div class="w3-section w3-center w3-large">
+	  	<b>Δήλωση Προβλήματος</b>
+	  </div>
+
+
+      <form class="w3-container" method="POST" action="res/insertProblem.php">
+        <div class="w3-section ">
+          <label><b>Τίτλος</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Εισάγετε Τίτλο Προβλήματος" name="title" required>
+          <br>
+          <label><b>Περιγραφή</b></label>
+          <input class="w3-input w3-border" type="text" placeholder="Εισάγετε Περιγραφή" name="description" required>
+
+      	  <br>
+          <label><b>Διεύθυνση</b></label>
+          <input class="w3-input w3-border" id="searchTextField" type="text" placeholder="Εισάγετε Διεύθυνση" name="address" autocomplete="on" required>
+                             
+               <input id="lat_id" name="lat" type="hidden">
+ 			 <input id="lng_id" name="lng" type="hidden" >
+          <br>
+          <label><b>Φωτογραφία</b></label>
+          <input class="w3-input w3-border" type="file"  accept="image/*" name="problemImage" required>
+
+
+
+          <button class="w3-btn-block w3-section w3-padding" type="submit">Υποβολή Προβλήματος</button>
+        </div>
+      </form>
+		  </div>
+		  
 	<!-- Use any element to open the sidenav -->      
 
 	<div id="mainSideBarPage">
@@ -72,20 +165,21 @@
     popupAnchor: [-3, -76]    
 });
 
-	<?php foreach($products as $product) { ?>
-	L.marker([<?php echo $product->lat; ?>, <?php echo $product->lng; ?>] , {icon: problemsIcon} ).addTo(mymap)
-		.bindPopup("<div style=''> <b> "+ " <?php echo $product->title; ?></b>"+"<br /> <p> "+ " <?php echo  $product->description; ?>" +" </p> <img src='res/images/problems/"+"<?php echo  $product->image_path; ?>"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> <p> "+ " <?php echo  $product->address; ?>" +"</p> </div>").openPopup();
+	<?php 
+	if(count($problems) > 0 ){
+	foreach($problems as $problem) { ?>
+	L.marker([<?php echo $problem->lat; ?>, <?php echo $problem->lng; ?>] , {icon: problemsIcon} ).addTo(mymap)
+		.bindPopup("<div> <b> "+ " <?php echo $problem->title; ?> </b>"+"<br> <p> "+ " <?php echo  $problem->description; ?>" +" </p> <img src='res/images/problems/"+"<?php echo  $problem->image_path; ?>"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> <p> "+ " <?php echo  $problem->address; ?>" +"</p> </div>").openPopup();
   <?php 
-       }
+	}}
   ?>
 
   L.marker([38.004642, 23.703084] , {icon: eventsIcon} ).addTo(mymap)
-		.bindPopup("<div style=''> <b>Πανηγύρι Αγίας Βαρβάρας </b><br />Εικόνα <img src='res/images/events/"+"panigiri01.jpg"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> </div>").openPopup();
+		.bindPopup("<div style=''> <b>Πανηγύρι Αγίας Βαρβάρας </b><br> <img src='res/images/events/"+"panigiri01.jpg"+"' width=196px height=196px style='margin-left: auto; margin-right: auto;'/> </div>").openPopup();
 
 	var popup = L.popup();
 
 </script>  
-
 
 
 

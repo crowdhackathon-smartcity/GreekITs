@@ -1,18 +1,14 @@
-<!DOCTYPE html>
+ε<!DOCTYPE html>
 <html>
 
 <head>
 <?php include 'res/libs/headLibs.php'; ?>
 <?php include 'res/libs/navbar.html'; ?>
+   	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
-        	<meta charset="utf-8" />
-<link rel="stylesheet" type="text/css" href="css/sidebar01.css">
- <style type="text/css">
-               body {
-                       font-family: sans-serif;
-                       font-size: 14px;
-               }
-       </style>
       
        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLha_GB44Ty36f2RwDHHz5YEameQYTB5Q&sensor=false&amp;libraries=places" type="text/javascript"></script>
        
@@ -22,10 +18,15 @@
 
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
 
+<link rel="stylesheet" type="text/css" href="css/sidebar01.css">
+
+<style>
 
 
-
-</head>
+div#mapid {
+       z-index: 0;
+}
+</style> 
 
 <script type="text/javascript">
        function initialize() {
@@ -47,6 +48,11 @@
   
 </script>
 
+
+</head>
+
+
+
 <script>
 
 
@@ -59,22 +65,23 @@
 
 	function openNav() {
 	    document.getElementById("mySidenav").style.width = "250px";
-	    document.getElementById("main").style.marginLeft = "250px";
+	    document.getElementById("mainSideBarPage").style.marginLeft = "250px";
 	}
 
 	function closeNav() {
 	    document.getElementById("mySidenav").style.width = "0";
-	    document.getElementById("main").style.marginLeft= "0";
+	    document.getElementById("mainSideBarPage").style.marginLeft= "0";
 	}
 
 
 </script>
 
 
+
 <body>
-
-
-
+          
+		  
+		  
 	<div id="mySidenav" class="sidenav w3-theme-dark">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
@@ -109,25 +116,21 @@
           <button class="w3-btn-block w3-section w3-padding" type="submit">Υποβολή Προβλήματος</button>
         </div>
       </form>
-
-	</div>
-
-	<!-- Use any element to open the sidenav -->
-
-	<br>
-	<br>
+		  </div>
+		  
+	<!-- Use any element to open the sidenav -->      
 
 	<div id="mainSideBarPage">
 
 	<div class="right-arrow" onclick="openNav()"></div>
 
 	</div>
-  <?php
+       <?php
   require('db_functions.php');
 
  ?>
 
-     <div id="mapid" style="width: 1100px; height: 600px;"></div>
+  <div id="mapid" style="width: 1100px; height: 600px;"></div>
 <script>
      <?php ?>
 	var mymap = L.map('mapid').setView([38.017665, 23.685927], 13);
@@ -163,16 +166,22 @@
     iconAnchor: [22, 85],
     popupAnchor: [-3, -76]    
 });
-<?php foreach($products as $product) { ?>
-	L.marker([<?php echo $product->lat; ?>, <?php echo $product->lng; ?>] , {icon: problemsIcon} ).addTo(mymap)
-		.bindPopup("<div style=''> <b> "+ " <?php echo $product->title; ?></b>"+"<br /> <p> "+ " <?php echo  $product->description; ?>" +" </p> <img src='res/images/problems/"+"<?php echo  $product->image_path; ?>"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> <p> "+ " <?php echo  $product->address; ?>" +"</p> </div>").openPopup();
+
+	<?php 
+	if(count($problems) > 0 ){
+	foreach($problems as $problem) { ?>
+	L.marker([<?php echo $problem->lat; ?>, <?php echo $problem->lng; ?>] , {icon: problemsIcon} ).addTo(mymap)
+		.bindPopup("<div> <b> "+ " <?php echo $problem->title; ?> </b>"+"<br> <p> "+ " <?php echo  $problem->description; ?>" +" </p> <img src='res/images/problems/"+"<?php echo  $problem->image_path; ?>"+"' width='90%' height='90%' style='margin-left: auto; margin-right: auto;'/> <p> "+ " <?php echo  $problem->address; ?>" +"</p> </div>").openPopup();
   <?php 
-       }
+	}}
   ?>
+
+  L.marker([38.004642, 23.703084] , {icon: eventsIcon} ).addTo(mymap)
+		.bindPopup("<div style=''> <b>Πανηγύρι Αγίας Βαρβάρας </b><br> <img src='res/images/events/"+"panigiri01.jpg"+"' width=196px height=196px style='margin-left: auto; margin-right: auto;'/> </div>").openPopup();
+
 	var popup = L.popup();
 
 </script>  
-
 
 
 
