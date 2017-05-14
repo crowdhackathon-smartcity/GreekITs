@@ -16,41 +16,41 @@
       
        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLha_GB44Ty36f2RwDHHz5YEameQYTB5Q&sensor=false&amp;libraries=places" type="text/javascript"></script>
        
-        <script type="text/javascript">
-               function initialize() {
-                       var input = document.getElementById('searchTextField');
-                       
-                       var autocomplete = new google.maps.places.Autocomplete(input);
-                      
-                    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-                       var place = autocomplete.getPlace();
-                       var loc =  place.geometry.location;
-                      // var res = loc.split(",");
-                         //console.log("input: " + loc.lng());
-                       document.getElementById("lat_id").value = loc.lng();
-                       document.getElementById("lng_id").value = loc.lat();                          
-                      
-            });                         
-               }
-               google.maps.event.addDomListener(window, 'load', initialize);              
-          
-      </script>
+
+
 
 </head>
 
+<script type="text/javascript">
+       function initialize() {
+               var input = document.getElementById('searchTextField');
+               
+               var autocomplete = new google.maps.places.Autocomplete(input);
+              
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+               var place = autocomplete.getPlace();
+               var loc =  place.geometry.location;
+              // var res = loc.split(",");
+                 //console.log("input: " + loc.lng());
+               document.getElementById("lat_id").value = loc.lng();
+               document.getElementById("lng_id").value = loc.lat();                          
+              
+    });                         
+       }
+       google.maps.event.addDomListener(window, 'load', initialize);              
+  
+</script>
+
 <script>
+
+
 	function w3_open() {
 	    document.getElementById("mySidebar").style.display = "block";
 	}
 	function w3_close() {
 	    document.getElementById("mySidebar").style.display = "none";
 	}
-</script>
-     
-	
 
-
-<script>
 	function openNav() {
 	    document.getElementById("mySidenav").style.width = "250px";
 	    document.getElementById("main").style.marginLeft = "250px";
@@ -60,7 +60,10 @@
 	    document.getElementById("mySidenav").style.width = "0";
 	    document.getElementById("main").style.marginLeft= "0";
 	}
+
+
 </script>
+
 
 <body>
 
@@ -77,7 +80,7 @@
 	  </div>
 
 
-      <form class="w3-container">
+      <form class="w3-container" method="POST" action="res/insertProblem.php">
         <div class="w3-section ">
           <label><b>Τίτλος</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Εισάγετε Τίτλο Προβλήματος" name="title" required>
@@ -89,11 +92,11 @@
           <label><b>Διεύθυνση</b></label>
           <input class="w3-input w3-border" id="searchTextField" type="text" placeholder="Εισάγετε Διεύθυνση" name="address" autocomplete="on" required>
                              
-                       <input id="lat_id" name="lat" type="hidden">
-  <input id="lng_id" name="lng" type="hidden" >
+               <input id="lat_id" name="lat" type="hidden">
+ 			 <input id="lng_id" name="lng" type="hidden" >
           <br>
           <label><b>Φωτογραφία</b></label>
-          <input class="w3-input w3-border" type="file"  accept="image/*" name="image" required>
+          <input class="w3-input w3-border" type="file"  accept="image/*" name="problemImage" required>
 
 
 
@@ -105,7 +108,8 @@
 
 	<!-- Use any element to open the sidenav -->
 
-
+	<br>
+	<br>
 
 	<div id="mainSideBarPage">
 
